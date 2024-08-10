@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS users_group_setting (
+    id BIGINT PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL,
+    group_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES users_group(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
