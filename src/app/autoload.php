@@ -1,9 +1,6 @@
 <?php
 
-// -------------------------------------- load class ----------------------------------------- //
-
-function app_class($className)
-{
+spl_autoload_register(function ($className) {
     $app_config_paths = include "config/apppath.php";
     $classParts = explode("\\", $className);
     $classFileName = end($classParts);
@@ -14,6 +11,8 @@ function app_class($className)
             return;
         }
     }
-}
+});
 
-spl_autoload_register("app_class");
+include_once "app/constant/vars.php";
+include_once "config/container.php";
+include_once "db/rb_connect.php";
