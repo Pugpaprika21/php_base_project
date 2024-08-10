@@ -2,8 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Foundation\RequestableHandler;
+use App\Foundation\RequestHandler;
+
 abstract class BaseController
 {
+    /**
+     * @return RequestableHandler
+     */
+    public function requests()
+    {
+        return new RequestHandler();
+    }
+
     /**
      * @return mixed
      */
@@ -56,7 +67,7 @@ abstract class BaseController
         ob_start();
         require $realpath;
         $output = ob_get_clean();
-        
+
         header("Content-Type: text/html; charset=UTF-8");
         echo $output;
         exit;
