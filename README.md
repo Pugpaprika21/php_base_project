@@ -15,7 +15,7 @@ To get started with the project, follow these steps:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://your-repository-url.git
+   git clone https://github.com/Pugpaprika21/php_base_project.git
    cd your-project-directory
 
 2. **Start the Project**
