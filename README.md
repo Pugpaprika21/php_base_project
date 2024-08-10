@@ -26,6 +26,8 @@ To get started with the project, follow these steps:
     
     This command will start the PHP application and PostgreSQL database containers.
 
+    (Support with PHP 8.2)
+
 3. **Access the Application**
 
     Web Interface: Open your browser and navigate to the following URL to access the web interface:
@@ -45,30 +47,34 @@ To get started with the project, follow these steps:
     Use the appropriate credentials provided in your docker-compose.yml file to connect to the database.
 
 5. **Project Structure**
-    src
-    │
-    ├── app
-    │   ├── constant
-    │   ├── controllers
-    │   ├── di
-    │   ├── foundation
-    │   ├── helpers
-    │   ├── libs
-    │   ├── repository
-    │   └── autoload.php
-    ├── config
-    ├── db
-    ├── logs
-    ├── schema
-    ├── utils
-    ├── views
-    └── index.php
-    docker-compose.yml
-    Dockerfile
-    README.md
+
+    ```
+        src
+        │
+        ├── app
+        │   ├── constant
+        │   ├── controllers
+        │   ├── di
+        │   ├── foundation
+        │   ├── helpers
+        │   ├── libs
+        │   ├── repository
+        │   └── autoload.php
+        ├── config
+        ├── db
+        ├── logs
+        ├── schema
+        ├── utils
+        ├── views
+        └── index.php
+        docker-compose.yml
+        Dockerfile
+        README.md
+    ```
 
 ## Contact Me ..
     For any questions or support, please contact pugpaprika21@gmail.com
 
-## Create By Pug
+## Create By 
+    Pug
 
