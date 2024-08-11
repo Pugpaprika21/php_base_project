@@ -15,9 +15,9 @@ class Respone extends Http implements Responeable
     private array|object $data = [];
 
     /**
-     * @var array
+     * @var string
      */
-    private array $headers = [];
+    private string $message = "";
 
     /**
      * @param integer $status
@@ -26,6 +26,16 @@ class Respone extends Http implements Responeable
     public function status(int $status = self::OK): Responeable
     {
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @param string $message
+     * @return Responeable
+     */
+    public function message(string $message): Responeable
+    {
+        $this->message = $message;
         return $this;
     }
 
@@ -47,7 +57,7 @@ class Respone extends Http implements Responeable
         http_response_code($this->status);
         header("Content-Type: application/json; charset=utf-8");
 
-        echo json_encode(ResponeMessage::create($this->status, $this->data));
+        echo json_encode(ResponeMessage::create($this->status, $this->message, $this->data));
         exit;
     }
 
@@ -55,20 +65,18 @@ class Respone extends Http implements Responeable
      * @param array $headers
      * @return void
      */
-    
+
     /* 
-
-        $respone->headers([
-            "Access-Control-Allow-Credentials: true",
-            "Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization",
-            "Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS",
-            "Cache-Control: no-store, no-cache, must-revalidate, max-age=0",
-            "Pragma: no-cache",
-            "X-Custom-Header: Value"
-        ]);
-
+    $respone->headers([
+        "Access-Control-Allow-Credentials: true",
+        "Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization",
+        "Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS",
+        "Cache-Control: no-store, no-cache, must-revalidate, max-age=0",
+        "Pragma: no-cache",
+        "X-Custom-Header: Value"
+    ]);
     */
-    
+
     public function headers(array $headers): Responeable
     {
         header_remove();

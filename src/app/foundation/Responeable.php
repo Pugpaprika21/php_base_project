@@ -11,6 +11,12 @@ interface Responeable
     public function status(int $status = Http::OK): Responeable;
 
     /**
+     * @param string $msg
+     * @return Responeable
+     */
+    public function message(string $msg): Responeable;
+
+    /**
      * @param array|object $data
      * @return Responeable
      */
