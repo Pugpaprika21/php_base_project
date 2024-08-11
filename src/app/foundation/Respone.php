@@ -15,11 +15,6 @@ class Respone extends Http implements Responeable
     private array|object $data = [];
 
     /**
-     * @var array
-     */
-    private array $headers = [];
-
-    /**
      * @param integer $status
      * @return Responeable
      */
