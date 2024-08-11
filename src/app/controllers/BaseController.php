@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Foundation\Requestable;
-use App\Foundation\RequestHandler;
+use App\Foundation\Request;
 use App\Foundation\Respone;
 use App\Foundation\Responeable;
 
@@ -14,7 +14,7 @@ abstract class BaseController
      */
     public function requests()
     {
-        return new RequestHandler();
+        return new Request();
     }
 
     /**
