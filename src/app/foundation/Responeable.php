@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Foundation;
+
+interface Responeable
+{
+    /**
+     * @param integer $status
+     * @return Responeable
+     */
+    public function status(int $status = Http::OK): Responeable;
+
+    /**
+     * @param array|object $data
+     * @return Responeable
+     */
+    public function data(array|object $data): Responeable;
+
+    /**
+     * @param integer $status
+     * @param mixed $data
+     * @return void
+     */
+    public function toJSON(): void;
+}

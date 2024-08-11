@@ -2,7 +2,7 @@
 
 namespace App\Foundation;
 
-interface RequestableHandler
+interface Requestable
 {
     /**
      * @param string $method

@@ -2,7 +2,7 @@
 
 namespace App\Foundation;
 
-class RequestHandler implements RequestableHandler
+class RequestHandler implements Requestable
 {
     public function body(string $method = "post"): array
     {

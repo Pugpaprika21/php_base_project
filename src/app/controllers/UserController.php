@@ -5,7 +5,8 @@ namespace App\Controllers;
 use App\DI\Container;
 use App\DI\Containerable;
 use App\Foundation\Http;
-use App\Foundation\RequestableHandler;
+use App\Foundation\Requestable;
+use App\Foundation\Responeable;
 use App\Repository\UserableRepository;
 
 class UserController extends BaseController
@@ -20,12 +21,12 @@ class UserController extends BaseController
         $this->repository = $this->container->repository(UserableRepository::class);
     }
 
-    public function index(RequestableHandler $request)
+    public function index(Requestable $request, Responeable $respone)
     {
         $body = $request->body();
 
         $users = $this->repository->findAll();
 
-        $this->toJSON($users, Http::OK);
+        $respone->status(Http::OK)->data($users)->toJSON();
     }
 }

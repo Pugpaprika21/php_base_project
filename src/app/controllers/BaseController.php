@@ -2,17 +2,27 @@
 
 namespace App\Controllers;
 
-use App\Foundation\RequestableHandler;
+use App\Foundation\Requestable;
 use App\Foundation\RequestHandler;
+use App\Foundation\Respone;
+use App\Foundation\Responeable;
 
 abstract class BaseController
 {
     /**
-     * @return RequestableHandler
+     * @return Requestable
      */
     public function requests()
     {
         return new RequestHandler();
+    }
+
+    /**
+     * @return Responeable
+     */
+    public function respones()
+    {
+        return new Respone();
     }
 
     /**
