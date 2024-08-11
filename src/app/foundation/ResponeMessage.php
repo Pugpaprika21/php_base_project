@@ -10,6 +10,7 @@ class ResponeMessage
      */
     private function __construct(
         public int $status,
+        public string $message,
         public array|object $data,
         public int $totalRows
     ) {
@@ -20,12 +21,13 @@ class ResponeMessage
 
     /**
      * @param integer $status
+     * @param string $message
      * @param array|object $data
      * @return self
      */
-    public static function create(int $status, array|object $data): self
+    public static function create(int $status, string $message, array|object $data): self
     {
-        return new self($status, $data, self::totalRows($data));
+        return new self($status, $message, $data, self::totalRows($data));
     }
 
     /**

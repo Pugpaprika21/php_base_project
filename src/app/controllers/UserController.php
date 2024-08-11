@@ -27,6 +27,6 @@ class UserController extends BaseController
 
         $users = $this->repository->findAll();
 
-        $respone->status(Http::OK)->data($users)->toJSON();
+        $respone->status(Http::OK)->message("success")->data($users)->toJSON();
     }
 }
