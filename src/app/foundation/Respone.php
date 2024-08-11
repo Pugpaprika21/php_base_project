@@ -2,19 +2,6 @@
 
 namespace App\Foundation;
 
-class ResponeMessage
-{
-    /**
-     * @param integer $status
-     * @param array|object $data
-     */
-    public function __construct(public int $status, public array|object $data)
-    {
-        $this->status = $status;
-        $this->data = $data;
-    }
-}
-
 class Respone extends Http implements Responeable
 {
     /**
@@ -26,6 +13,11 @@ class Respone extends Http implements Responeable
      * @var array|object
      */
     private array|object $data = [];
+
+    /**
+     * @var array
+     */
+    private array $headers = [];
 
     /**
      * @param integer $status
@@ -55,7 +47,36 @@ class Respone extends Http implements Responeable
         http_response_code($this->status);
         header("Content-Type: application/json; charset=utf-8");
 
-        echo json_encode(new ResponeMessage($this->status, $this->data));
+        echo json_encode(ResponeMessage::create($this->status, $this->data));
         exit;
+    }
+
+    /**
+     * @param array $headers
+     * @return void
+     */
+    
+    /* 
+
+        $respone->headers([
+            "Access-Control-Allow-Credentials: true",
+            "Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization",
+            "Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS",
+            "Cache-Control: no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma: no-cache",
+            "X-Custom-Header: Value"
+        ]);
+
+    */
+    
+    public function headers(array $headers): Responeable
+    {
+        header_remove();
+
+        foreach ($headers as $header) {
+            header($header);
+        }
+
+        return $this;
     }
 }

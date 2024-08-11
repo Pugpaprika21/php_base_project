@@ -22,4 +22,11 @@ interface Responeable
      * @return void
      */
     public function toJSON(): void;
+
+    /**
+     * @param array $headers
+     * @return void
+     */
+    
+    public function headers(array $headers): Responeable; 
 }

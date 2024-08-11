@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Foundation;
+
+class ResponeMessage
+{
+    /**
+     * @param integer $status
+     * @param array|object $data
+     */
+    private function __construct(
+        public int $status,
+        public array|object $data,
+        public int $totalRows
+    ) {
+        $this->status = $status;
+        $this->data = $data;
+        $this->totalRows = $totalRows;
+    }
+
+    /**
+     * @param integer $status
+     * @param array|object $data
+     * @return self
+     */
+    public static function create(int $status, array|object $data): self
+    {
+        return new self($status, $data, self::totalRows($data));
+    }
+
+    /**
+     * @param array|object $data
+     * @return integer
+     */
+    private static function totalRows(array|object $data): int
+    {
+        if (is_array($data)) {
+            return count($data);
+        }
+        if (is_object($data)) {
+            return method_exists($data, 'toArray') ? count($data->toArray()) : count(get_object_vars($data));
+        }
+        return 0;
+    }
+}
