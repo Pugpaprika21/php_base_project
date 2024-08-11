@@ -40,9 +40,13 @@ class Container implements Containerable
      */
     public function repository($interface)
     {
-        if (!empty($this->building["repository"])) {
-            return $this->building["repository"]()[$interface];
+        if (interface_exists($interface) && strpos($interface, "Repository") !== false) {
+            if (!empty($this->building["repository"])) {
+                return $this->building["repository"]()[$interface];
+            }
+            throw new Exception("repository not found: {$interface}");
         }
-        throw new Exception("repository not found: {$interface}");
+
+        throw new Exception("invalid interface or missing 'Repository' keyword: {$interface}");
     }
 }

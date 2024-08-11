@@ -18,14 +18,15 @@ try {
     if (class_exists($controller) && method_exists($controller, $method)) {
         $controller = new $controller($container);
         $requests = $controller->requests();
+        $respones = $controller->respones();
         switch ($route) {
             case "web":
                 header_xss();
-                $controller->{$method}($requests);
+                $controller->{$method}($requests, $respones);
                 break;
             case "api":
                 header_cors();
-                $controller->{$method}($requests);
+                $controller->{$method}($requests, $respones);
                 break;
             default:
                 throw new Exception("error processing (route not match)");
