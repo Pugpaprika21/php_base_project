@@ -66,7 +66,7 @@ abstract class BaseController
     /**
      * @param string $path
      * @param array $data
-     * @return void
+     * @return string
      */
     protected function view($path, $data = [])
     {
@@ -78,9 +78,7 @@ abstract class BaseController
         require $realpath;
         $output = ob_get_clean();
 
-        header("Content-Type: text/html; charset=UTF-8");
-        echo $output;
-        exit;
+        return $output;
     }
 
     /**
