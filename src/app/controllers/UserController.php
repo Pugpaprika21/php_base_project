@@ -29,4 +29,11 @@ class UserController extends BaseController
 
         $respone->status(Http::OK)->message("success")->data($users)->toJSON();
     }
+
+    public function doPost(Requestable $request, Responeable $respone)
+    {
+        $body = $request->ajax();
+
+        $respone->status(Http::OK)->message("success")->data($body)->toJSON();
+    }
 }

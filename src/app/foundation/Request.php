@@ -2,6 +2,8 @@
 
 namespace App\Foundation;
 
+use JsonException;
+
 class Request implements Requestable
 {
     public function body(string $method = "post"): array
@@ -20,6 +22,23 @@ class Request implements Requestable
         }
 
         return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function ajax()
+    {
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new JsonException("invalid JSON format: " . json_last_error_msg());
+        }
+
+        $request = file_get_contents("php://input");
+        if (!empty($request)) {
+            return json_decode($request, true);
+        }
+
+        return [];
     }
 
     private function sanitizeInput(array $data): array
