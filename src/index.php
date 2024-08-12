@@ -22,7 +22,7 @@ try {
         switch ($route) {
             case "web":
                 header_xss();
-                $controller->{$method}($requests, $respones);
+                require_once "views/web.php";
                 break;
             case "api":
                 header_cors();

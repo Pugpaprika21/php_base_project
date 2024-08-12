@@ -91,6 +91,7 @@ function header_xss()
     header("X-Frame-Options: DENY");
     header("X-XSS-Protection: 1; mode=block");
     header("X-Content-Type-Options: nosniff");
+    header("Content-Type: text/html; charset=UTF-8");
     //header("Content-Security-Policy: default-src \"self\"; script-src \"self\"; object-src \"none\";");
 }
 
@@ -187,4 +188,12 @@ function env($key)
 {
     $env = parse_ini_file("config/.env");
     return !empty($env[$key]) ? $env[$key] : "";
+}
+
+/**
+ * @return string
+ */
+function csrf_web(): string
+{
+    return bin2hex(random_bytes(32));
 }

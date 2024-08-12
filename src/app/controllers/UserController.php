@@ -36,4 +36,9 @@ class UserController extends BaseController
 
         $respone->status(Http::OK)->message("success")->data($body)->toJSON();
     }
+
+    public function home(Requestable $request, Responeable $respone)
+    {
+        return $this->view("content.php", ["name" => "alex"]);
+    }
 }
