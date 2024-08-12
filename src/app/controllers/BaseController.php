@@ -56,9 +56,9 @@ abstract class BaseController
      */
     protected function allow($method)
     {
-        if ($_SERVER["REQUEST_METHOD"] != $method) {
+        if ($_SERVER["REQUEST_METHOD"] != strtoupper($method)) {
             http_response_code(405);
-            echo "method not allowed";
+            echo "method not allowed : " . $method;
             exit;
         }
     }

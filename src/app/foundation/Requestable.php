@@ -9,4 +9,9 @@ interface Requestable
      * @return array
      */
     public function body(string $method = "post"): array;
+
+    /**
+     * @return array
+     */
+    public function ajax();
 }
