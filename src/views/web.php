@@ -33,9 +33,7 @@
             error_log($e->getMessage());
             echo sprintf("<p>error: %s</p>", htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8"));
         } finally {
-            $controller = null;
-            $requests = null;
-            $respones = null;
+            unset($controller, $requests, $respones);
         }
         ?>
 
