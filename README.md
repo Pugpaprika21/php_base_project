@@ -32,7 +32,7 @@ To get started with the project, follow these steps:
 
     Web Interface: Open your browser and navigate to the following URL to access the web interface:
 
-    http://localhost:8000/?route=/web/helloworld/index
+    http://localhost:8000/?route=/web/user/welcome
 
     API Endpoint: To access the API, use the following URL:
 

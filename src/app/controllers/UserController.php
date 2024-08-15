@@ -23,22 +23,16 @@ class UserController extends BaseController
 
     public function index(Requestable $request, Responeable $respone)
     {
-        $body = $request->body();
-
         $users = $this->repository->findAll();
 
         $respone->status(Http::OK)->message("success")->data($users)->toJSON();
     }
 
-    public function doPost(Requestable $request, Responeable $respone)
+    public function welcome(Requestable $request, Responeable $respone)
     {
-        $body = $request->ajax();
-
-        $respone->status(Http::OK)->message("success")->data($body)->toJSON();
-    }
-
-    public function home(Requestable $request, Responeable $respone)
-    {
-        return $this->view("content.php", ["name" => "alex"]);
+        return $this->view("welcome.php", [
+            'title' => "Hello, Welcome!",
+            'content' => "Thank you for visiting our website. We hope you enjoy our content and have the best experience on our site."
+        ]);
     }
 }
