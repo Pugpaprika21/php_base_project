@@ -63,6 +63,8 @@ To get started with the project, follow these steps:
         ├── config
         ├── db
         ├── logs
+        ├── notes
+        ├── router
         ├── schema
         ├── utils
         ├── views
@@ -71,7 +73,7 @@ To get started with the project, follow these steps:
         Dockerfile
         README.md
     ```
-
+    
 ## Contact Me ..
     For any questions or support, please contact pugpaprika21@gmail.com
 

@@ -6,36 +6,50 @@ ini_set("display_errors", "1");
 ini_set("display_startup_errors", "1");
 error_reporting(E_ALL);
 
-include_once "utils/function.php";
-include_once "app/autoload.php";
+$router = [];
+require_once "utils/function.php";
+require_once "app/autoload.php";
+require_once "router/web.php";
+require_once "router/api.php";
 
-try {    
-    $action = route_parse_urls();
-    $route = $action["route"];
-    $controller = APP_NAMESPACE . ucfirst($action["controller"])  . "Controller";
-    $method = $action["method"];
+$action = route_parse_urls();
 
-    if (class_exists($controller) && method_exists($controller, $method)) {
-        $controller = new $controller($container);
-        $requests = $controller->requests();
-        $respones = $controller->respones();
-        switch ($route) {
-            case "web":
-                header_xss();
-                require_once "views/web.php";
-                break;
-            case "api":
-                header_cors();
-                $controller->{$method}($requests, $respones);
-                break;
-            default:
-                throw new Exception("error processing (route not match)");
-                break;
+$route = $action["route"];
+$path = $action["path"];
+
+try {
+    if (isset($router[$route][$path])) {
+        $handler = $router[$route][$path];
+        if (!is_null($handler)) {
+            switch ($route) {
+                case "web":
+                    if (gettype($handler) == "object") {
+                        $html = !empty($handler()) ? $handler() : "";
+                    } else {
+                        $controller = ucfirst($handler[0]);
+                        $controller = new $controller($container);
+                        $requests = $controller->requests();
+                        $respones = $controller->respones();
+                        $html = $controller->{$handler[1]}($requests, $respones);
+                    }
+
+                    header_xss();
+                    require_once "views/web.php";
+                    break;
+                case "api":
+                    /*  */
+                    break;
+                default:
+                    throw new Exception("error processing (route not match)");
+                    break;
+            }
         }
     } else {
-        throw new Exception("error processing (controller or method not found)");
+        throw new Exception("page not found..");
     }
 } catch (Exception $e) {
     http_response_code(500);
     die($e->getMessage());
 }
+
+unset($router);
