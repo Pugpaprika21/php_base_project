@@ -20,23 +20,8 @@
 <body>
 
     <div id="app">
-        <?php
-        global $controller;
-
-        try {
-            $output = $controller->{$method}($requests, $respones);
-            if (empty($output)) {
-                throw new Exception("no content to display or method failed.");
-            }
-            echo $output;
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            echo sprintf("<p>error: %s</p>", htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8"));
-        } finally {
-            unset($controller, $requests, $respones);
-        }
-        ?>
-
+        <?php echo $content; ?>
+        
     </div>
 
 

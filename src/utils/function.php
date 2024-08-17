@@ -56,15 +56,25 @@ function current_url()
  */
 function route_parse_urls()
 {
-    $route = isset($_GET["route"]) ? trim($_GET["route"], "/") : "";
-    $parts = explode("/", conText($route));
-    $parsedRoute = [
-        "route" => isset($parts[0]) ? conText($parts[0]) : "",
-        "controller" => isset($parts[1]) ? conText($parts[1]) : "",
-        "method" => isset($parts[2]) ? conText($parts[2]) : ""
-    ];
+    $protocol = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off" || $_SERVER["SERVER_PORT"] == 443) ? "https://" : "http://";
+    $host = $_SERVER["HTTP_HOST"];
+    $requestUri = $_SERVER["REQUEST_URI"];
 
-    return $parsedRoute;
+    $url = conText($protocol . $host . $requestUri);
+    $queryAction = parse_url($url, PHP_URL_QUERY);
+    $parts = explode("/", $queryAction);
+
+    $route = isset($parts[1]) ? conText($parts[1]) : "";
+    $controller = isset($parts[2]) ? conText($parts[2]) : "";
+    $method = isset($parts[3]) ? conText($parts[3]) : "";
+    $path = $controller . "/" . $method;
+
+    return [
+        "route" => $route,
+        "controller" => $controller,
+        "method" => $method,
+        "path" => $path,
+    ];
 }
 
 /**

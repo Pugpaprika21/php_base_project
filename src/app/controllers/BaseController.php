@@ -2,29 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Foundation\Requestable;
-use App\Foundation\Request;
-use App\Foundation\Respone;
-use App\Foundation\Responeable;
-
 abstract class BaseController
 {
-    /**
-     * @return Requestable
-     */
-    public function requests()
-    {
-        return new Request();
-    }
-
-    /**
-     * @return Responeable
-     */
-    public function respones()
-    {
-        return new Respone();
-    }
-
     /**
      * @return mixed
      */
@@ -46,8 +25,7 @@ abstract class BaseController
 
         $data = ARR_UPPER_CASE ? arr_upr(["data" => $data]) : ["data" => $data];
 
-        echo json_encode($data);
-        exit;
+        return json_encode($data);
     }
 
     /**

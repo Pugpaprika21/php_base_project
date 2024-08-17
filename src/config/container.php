@@ -4,8 +4,6 @@ use App\DI\Container;
 
 $container = new Container();
 
-// ----------------------- config --------------------------- //
-
 $container->set("config", function () {
     return [
         "db" => [
@@ -17,8 +15,6 @@ $container->set("config", function () {
         ]
     ];
 });
-
-// ----------------------- pdo --------------------------- //
 
 $container->set("pdo", function () {
     try {
@@ -32,8 +28,6 @@ $container->set("pdo", function () {
         die("connection failed: " . $e->getMessage());
     }
 });
-
-// ----------------------- repository --------------------------- //
 
 $container->set("repository", function () { 
     return include "app/repository/register.php";

@@ -50,15 +50,14 @@ class Respone extends Http implements Responeable
     }
 
     /**
-     * @return void
+     * @return string|false
      */
-    public function toJSON(): void
+    public function toJSON()
     {
         http_response_code($this->status);
         header("Content-Type: application/json; charset=utf-8");
 
-        echo json_encode(ResponeMessage::create($this->status, $this->message, $this->data));
-        exit;
+        return json_encode(ResponeMessage::create($this->status, $this->message, $this->data));
     }
 
     /**
