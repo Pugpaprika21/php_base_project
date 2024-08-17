@@ -23,16 +23,14 @@ interface Responeable
     public function data(array|object $data): Responeable;
 
     /**
-     * @param integer $status
-     * @param mixed $data
-     * @return void
+     * @return string|false
      */
-    public function toJSON(): void;
+    public function toJSON();
 
     /**
      * @param array $headers
      * @return void
      */
-    
-    public function headers(array $headers): Responeable; 
+
+    public function headers(array $headers): Responeable;
 }

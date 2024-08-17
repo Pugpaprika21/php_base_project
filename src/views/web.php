@@ -20,7 +20,8 @@
 <body>
 
     <div id="app">
-        <?php echo $html; ?>
+        <?php echo $content; ?>
+        
     </div>
 
 
