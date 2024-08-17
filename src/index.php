@@ -50,6 +50,8 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     die($e->getMessage());
+} finally {
+    unset($router);
 }
 
-unset($router);
+
