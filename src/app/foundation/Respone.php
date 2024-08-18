@@ -61,6 +61,24 @@ class Respone extends Http implements Responeable
     }
 
     /**
+     * @param string $path
+     * @param array $data
+     * @return string
+     */
+    public function view($path, $data = [])
+    {
+        $realpath = "views/" . $path;
+
+        extract($data);
+
+        ob_start();
+        require $realpath;
+        $output = ob_get_clean();
+
+        return $output;
+    }
+
+    /**
      * @param array $headers
      * @return void
      */
