@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Foundation\Request;
 use App\Foundation\Respone;
+use App\Foundation\RouteParser;
 
 $router = [];
 require_once "utils/function.php";
@@ -11,9 +12,10 @@ require_once "app/autoload.php";
 require_once "router/web.php";
 require_once "router/api.php";
 
-$action = route_parse_urls();
+$action = RouteParser::parseUrl();
 $route = $action["route"];
 $path = $action["path"];
+$pageStatus = 500;
 
 try {
     if (isset($router[$route][$path])) {
@@ -45,10 +47,11 @@ try {
                 throw new Exception("route type not supported");
         }
     } else {
+        $pageStatus = 404;
         throw new Exception("page not found");
     }
 } catch (Exception $e) {
-    http_response_code(500);
+    http_response_code($pageStatus);
     echo $e->getMessage();
 } finally {
     unset($router);

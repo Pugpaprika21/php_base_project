@@ -13,5 +13,16 @@ interface Requestable
     /**
      * @return array
      */
+    public function any(): array;
+
+    /**
+     * @return array
+     */
     public function ajax();
+
+     /**
+     * @param string $method
+     * @return void
+     */
+    public function allow($method);
 }

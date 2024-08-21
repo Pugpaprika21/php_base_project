@@ -28,9 +28,15 @@ interface Responeable
     public function toJSON();
 
     /**
+     * @param string $path
+     * @param array $data
+     * @return string
+     */
+    public function view($path, $data = []);
+
+    /**
      * @param array $headers
      * @return void
      */
-
     public function headers(array $headers): Responeable;
 }

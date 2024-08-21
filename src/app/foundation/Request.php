@@ -20,8 +20,16 @@ class Request implements Requestable
         if ($method && isset($data[strtolower($method)])) {
             return $data[strtolower($method)];
         }
-
+        
         return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function any(): array
+    {
+        return $this->body("-");
     }
 
     /**
@@ -39,6 +47,19 @@ class Request implements Requestable
         }
 
         return [];
+    }
+
+    /**
+     * @param string $method
+     * @return void
+     */
+    public function allow($method)
+    {
+        if ($_SERVER["REQUEST_METHOD"] != strtoupper($method)) {
+            http_response_code(405);
+            echo "method not allowed : " . $method;
+            exit;
+        }
     }
 
     private function sanitizeInput(array $data): array
