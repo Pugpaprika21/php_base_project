@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Foundation\Request;
 use App\Foundation\Respone;
+use App\Foundation\RouteParser;
 
 $router = [];
 require_once "utils/function.php";
@@ -11,7 +12,7 @@ require_once "app/autoload.php";
 require_once "router/web.php";
 require_once "router/api.php";
 
-$action = route_parse_urls();
+$action = RouteParser::parseUrl();
 $route = $action["route"];
 $path = $action["path"];
 
