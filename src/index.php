@@ -15,6 +15,7 @@ require_once "router/api.php";
 $action = RouteParser::parseUrl();
 $route = $action["route"];
 $path = $action["path"];
+$pageStatus = 500;
 
 try {
     if (isset($router[$route][$path])) {
@@ -46,10 +47,11 @@ try {
                 throw new Exception("route type not supported");
         }
     } else {
+        $pageStatus = 404;
         throw new Exception("page not found");
     }
 } catch (Exception $e) {
-    http_response_code(500);
+    http_response_code($pageStatus);
     echo $e->getMessage();
 } finally {
     unset($router);
